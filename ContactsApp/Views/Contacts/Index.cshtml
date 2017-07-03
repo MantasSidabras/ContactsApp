@@ -1,0 +1,17 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<table>
+    @foreach (var contact in Model)
+    {
+        <tr>
+            <td>@contact.FirstName</td>
+            <td>@contact.LastName</td>
+            <td>@contact.Email</td>
+            <td>@contact.Phone</td>
+        </tr>
+
+    }
+</table>
