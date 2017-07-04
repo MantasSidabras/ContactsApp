@@ -6,24 +6,46 @@ using System.Web.Mvc;
 using ContactsApp.Models;
 using System.Text;
 using ContactsApp.Contact_Access;
+using ContactsApp.Intefaces;
 
 namespace ContactsApp.Controllers
 {
+    
+
     public class ContactsController : Controller
-    {   
+    {
         // GET: Contacts
+
+        IContactAccess contactAccess;
+        //public ContactsController(IContactAccess contactAccess)
+        //{
+        //    this.contactAccess = contactAccess;
+        //}
+
+        public ContactsController()
+        {
+            this.contactAccess = new ContactAccess();
+        }
+
+        [Route("")]
+        [Route("Contacts")]
+        [Route("Contacts/Index")]
         public ActionResult Index()
         {
-            var contactAccess = new ContactAccess();
-            var contactList = contactAccess.contacts.ToList();
+            var contactList = contactAccess.GetContacts();
             return View(contactList);
         }
 
-        public ActionResult DisplayContact(int id)
+        [Route("Contacts/{id}")]
+        public ActionResult Contact(int id)
         {
-            var contactAccess = new ContactAccess();
-            var contactList = contactAccess.contacts.ToList();
-            return View(contactList[id]);
+            var contact = contactAccess.GetContact(id);
+            return View(contact);
+        }
+
+        public ActionResult CreateContact()
+        {
+            return View();
         }
     }
 }

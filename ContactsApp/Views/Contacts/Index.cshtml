@@ -1,16 +1,16 @@
-﻿
+﻿@model Dictionary<int, ContactsApp.Models.Contact>
 @{
     ViewBag.Title = "Index";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 <table>
-    @foreach (var contact in Model)
+    @foreach (var item in Model)
     {
         <tr>
-            <td>@contact.FirstName</td>
-            <td>@contact.LastName</td>
-            <td>@contact.Email</td>
-            <td>@contact.Phone</td>
+            <td>@item.Value.FirstName</td>
+            <td>@item.Value.LastName</td>
+            <td>@item.Value.Email</td>
+            <td>@item.Value.Phone</td>
         </tr>
 
     }
