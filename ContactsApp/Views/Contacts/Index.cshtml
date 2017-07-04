@@ -3,7 +3,14 @@
     ViewBag.Title = "Index";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
-<table>
+<table class="table table-hover">
+    <tr>
+        <th>First name</th>
+        <th>Last name </th>
+        <th>Email</th>
+        <th>Phone number</th>
+    </tr>
+
     @foreach (var item in Model)
     {
         <tr>
@@ -11,6 +18,8 @@
             <td>@item.Value.LastName</td>
             <td>@item.Value.Email</td>
             <td>@item.Value.Phone</td>
+            <td>@Html.ActionLink("edit", "Edit", new { id = item.Key })</td>
+            <td>@Html.ActionLink("delete", "Delete", new { id = item.Key })</td>
         </tr>
 
     }

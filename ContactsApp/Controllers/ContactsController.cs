@@ -10,13 +10,13 @@ using ContactsApp.Intefaces;
 
 namespace ContactsApp.Controllers
 {
-    
+
 
     public class ContactsController : Controller
     {
         // GET: Contacts
 
-        IContactAccess contactAccess;
+        private static IContactAccess contactAccess;
         //public ContactsController(IContactAccess contactAccess)
         //{
         //    this.contactAccess = contactAccess;
@@ -24,7 +24,8 @@ namespace ContactsApp.Controllers
 
         public ContactsController()
         {
-            this.contactAccess = new ContactAccess();
+            if (contactAccess == null)
+                contactAccess = new ContactAccess();
         }
 
         [Route("")]
@@ -43,9 +44,47 @@ namespace ContactsApp.Controllers
             return View(contact);
         }
 
-        public ActionResult CreateContact()
+        [Route("Contacts/Create")]
+        [HttpGet]
+        public ActionResult Create()
         {
             return View();
+        }
+        [Route("Contacts/Create")]
+        [HttpPost]
+        public ActionResult Create(Contact contact)
+        {
+            contactAccess.AddContact(new Contact()
+            {
+                FirstName = contact.FirstName,
+                LastName = contact.LastName,
+                Email = contact.Email,
+                Phone = contact.Phone
+            });
+            return Redirect("/Contacts/Index");
+        }
+
+        [Route("Contacts/Edit/{id}")]
+        [HttpGet]
+        public ActionResult Edit(int id)
+        {
+            var contact = contactAccess.GetContact(id);
+            return View(contact);
+        }
+
+        [Route("Contacts/Edit/{id}")]
+        [HttpPost]
+        public ActionResult Edit(Contact contact)
+        {
+            contactAccess.GetContacts()[contact.Id] = contact;
+            return Redirect("/Contacts/Index");
+        }
+
+        [Route("Contacts/Delete/{id}")]
+        public ActionResult Delete(int id)
+        {
+            contactAccess.DeleteContact(id);
+            return Redirect("/Contacts/Index");
         }
     }
 }

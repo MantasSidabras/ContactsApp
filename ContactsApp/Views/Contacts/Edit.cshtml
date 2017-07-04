@@ -1,0 +1,37 @@
+﻿@model ContactsApp.Models.Contact
+@{
+    ViewBag.Title = "Edit";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@using (Html.BeginForm())
+{
+    <form method="post">
+        First name:<br>
+        <input type="text" name="firstname" value="@Model.FirstName" />
+        <br>
+        Last name:<br>
+        <input type="text" name="lastname" value="@Model.LastName" />
+        <br>
+        Email: <br>
+        <input type="text" name="email" value="@Model.Email" />
+        <br>
+        Phone: <br>
+        <input type="text" name="phone" value="@Model.Phone" />
+        <br><br>
+        <input type="submit" value="Submit" class="btn btn-default">
+    </form>
+}
+
+@{
+    if (IsPost)
+    {
+        Model.FirstName = Request.Form["firstname"];
+        Model.LastName = Request.Form["lastname"];
+        Model.Email = Request.Form["email"];
+        Model.Phone = Request.Form["phone"];
+    }
+}
+
+<h2>Edit</h2>
+

@@ -9,7 +9,7 @@ namespace ContactsApp.Contact_Access
 {
     public class ContactAccess : IContactAccess
     {
-        private Dictionary<int, Contact> contacts;
+        private static Dictionary<int, Contact> contacts;
         private int id = 0;
 
         public ContactAccess()
