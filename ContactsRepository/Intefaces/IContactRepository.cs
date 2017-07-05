@@ -7,12 +7,12 @@ using System.Threading.Tasks;
 
 namespace ContactsApp.Data.Intefaces
 {
-    public interface IContactAccess
+    public interface IContactRepository
     {
         Contact AddContact(Contact contact);
         void DeleteContact(int index);
         Contact GetContact(int index);
-        IDictionary<int, Contact> GetContacts();
+        IEnumerable<Contact> GetContacts();
         void Update(Contact contact);
     }
 }

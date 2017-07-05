@@ -1,4 +1,4 @@
-﻿@model Dictionary<int, ContactsApp.Data.Models.Contact>
+﻿@model IEnumerable<ContactsApp.Data.Models.Contact>
 @{
     ViewBag.Title = "Index";
     Layout = "~/Views/Shared/_Layout.cshtml";
@@ -14,12 +14,12 @@
     @foreach (var item in Model)
     {
         <tr>
-            <td>@item.Value.FirstName</td>
-            <td>@item.Value.LastName</td>
-            <td>@item.Value.Email</td>
-            <td>@item.Value.Phone</td>
-            <td>@Html.ActionLink("edit", "Edit", new { id = item.Key })</td>
-            <td>@Html.ActionLink("delete", "Delete", new { id = item.Key })</td>
+            <td>@item.FirstName</td>
+            <td>@item.LastName</td>
+            <td>@item.Email</td>
+            <td>@item.Phone</td>
+            <td>@Html.ActionLink("edit", "Edit", new { id = item.Id })</td>
+            <td>@Html.ActionLink("delete", "Delete", new { id = item.Id })</td>
         </tr>
 
     }

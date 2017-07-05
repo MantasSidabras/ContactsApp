@@ -10,22 +10,18 @@ using ContactsApp.Data.Models;
 
 namespace ContactsApp.Controllers
 {
-
-
     public class ContactsController : Controller
     {
-        // GET: Contacts
+        private readonly IContactRepository _contactRepository;
 
-        private static IContactAccess contactAccess;
-        //public ContactsController(IContactAccess contactAccess)
+        //public ContactsController(IContactRepository contactRepository)
         //{
-        //    this.contactAccess = contactAccess;
+        //    _contactRepository = contactRepository;
         //}
 
         public ContactsController()
         {
-            if (contactAccess == null)
-                contactAccess = new ContactAccess();
+            _contactRepository = new ContactRepository();
         }
 
         [Route("")]
@@ -33,14 +29,14 @@ namespace ContactsApp.Controllers
         [Route("Contacts/Index")]
         public ActionResult Index()
         {
-            var contactList = contactAccess.GetContacts();
+            var contactList = _contactRepository.GetContacts();
             return View(contactList);
         }
 
         [Route("Contacts/{id}")]
         public ActionResult Contact(int id)
         {
-            var contact = contactAccess.GetContact(id);
+            var contact = _contactRepository.GetContact(id);
             return View(contact);
         }
 
@@ -54,7 +50,7 @@ namespace ContactsApp.Controllers
         [HttpPost]
         public ActionResult Create(Contact contact)
         {
-            contactAccess.AddContact(new Contact()
+            _contactRepository.AddContact(new Contact()
             {
                 FirstName = contact.FirstName,
                 LastName = contact.LastName,
@@ -68,7 +64,7 @@ namespace ContactsApp.Controllers
         [HttpGet]
         public ActionResult Edit(int id)
         {
-            var contact = contactAccess.GetContact(id);
+            var contact = _contactRepository.GetContact(id);
             return View(contact);
         }
 
@@ -76,14 +72,14 @@ namespace ContactsApp.Controllers
         [HttpPost]
         public ActionResult Edit(Contact contact)
         {
-            contactAccess.Update(contact);
+            _contactRepository.Update(contact);
             return Redirect("/Contacts/Index");
         }
 
         [Route("Contacts/Delete/{id}")]
         public ActionResult Delete(int id)
         {
-            contactAccess.DeleteContact(id);
+            _contactRepository.DeleteContact(id);
             return Redirect("/Contacts/Index");
         }
     }
