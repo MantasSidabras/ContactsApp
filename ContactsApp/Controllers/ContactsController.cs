@@ -3,10 +3,10 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
-using ContactsApp.Models;
 using System.Text;
 using ContactsApp.Contact_Access;
-using ContactsApp.Intefaces;
+using ContactsApp.Data.Intefaces;
+using ContactsApp.Data.Models;
 
 namespace ContactsApp.Controllers
 {
@@ -76,7 +76,7 @@ namespace ContactsApp.Controllers
         [HttpPost]
         public ActionResult Edit(Contact contact)
         {
-            contactAccess.GetContacts()[contact.Id] = contact;
+            contactAccess.Update(contact);
             return Redirect("/Contacts/Index");
         }
 

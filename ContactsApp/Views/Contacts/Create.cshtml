@@ -1,4 +1,4 @@
-﻿@model ContactsApp.Models.Contact
+﻿@model ContactsApp.Data.Models.Contact
 @{
     ViewBag.Title = "Create";
     Layout = "~/Views/Shared/_Layout.cshtml";
@@ -9,16 +9,16 @@
 {
 <form method="post">
     First name:<br>
-    <input type="text" name="firstname" value="" />
+    <input type="text" name="firstname" value="" required pattern="[A-Za-z]+" title="First name can only consist of letters."/>
     <br>
     Last name:<br>
-    <input type="text" name="lastname" value="" />
+    <input type="text" name="lastname" value="" required pattern="[A-Za-z]+" title="Last name can only consist of letters."/>
     <br>
     Email: <br>
-    <input type="text" name="email" value="" />
+    <input type="text" name="email" value="" required pattern="@Html.Raw(@"^\S+@\S+$")" title="Incorrect email."/>
     <br>
     Phone: <br>
-    <input type="text" name="phone" value="" />
+    <input type="text" name="phone" value="" required pattern="\+?\d+" title="phone number is not valid"/>
     <br><br>
     <input type="submit" value="Submit" class="btn btn-default">
 </form> 
@@ -26,6 +26,7 @@
 
 
 @{
+    
     if (IsPost)
     {
         Model.FirstName = Request.Form["firstname"];

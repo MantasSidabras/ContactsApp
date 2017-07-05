@@ -1,11 +1,11 @@
-﻿using ContactsApp.Models;
+﻿using ContactsApp.Data.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ContactsApp.Intefaces
+namespace ContactsApp.Data.Intefaces
 {
     public interface IContactAccess
     {
@@ -13,5 +13,6 @@ namespace ContactsApp.Intefaces
         void DeleteContact(int index);
         Contact GetContact(int index);
         IDictionary<int, Contact> GetContacts();
+        void Update(Contact contact);
     }
 }

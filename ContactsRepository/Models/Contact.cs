@@ -4,11 +4,10 @@ using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Web;
 
-namespace ContactsApp.Models
+namespace ContactsApp.Data.Models
 {
     public class Contact
     {
-        [Required]
         public int Id { get; set; }
         [Required]
         public string FirstName { get; set; }

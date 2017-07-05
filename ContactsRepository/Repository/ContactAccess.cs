@@ -1,5 +1,5 @@
-﻿using ContactsApp.Intefaces;
-using ContactsApp.Models;
+﻿using ContactsApp.Data.Intefaces;
+using ContactsApp.Data.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -15,9 +15,9 @@ namespace ContactsApp.Contact_Access
         public ContactAccess()
         {
             contacts = new Dictionary<int, Contact>();
-            AddContact(new Contact() { FirstName = "Jonas", LastName = "Motiejauskas", Email = "jonas.motiejauskas@gmail.com", Phone = "86789456" });
-            AddContact(new Contact() { FirstName = "Benas", LastName = "Orlovas" });
-            AddContact(new Contact() { FirstName = "Povilas", LastName = "Zvirblis" });
+            AddContact(new Contact() { FirstName = "Jonas", LastName = "Motiejauskas", Email = "jonas.motiejauskas@gmail.com", Phone = "867894569" });
+            AddContact(new Contact() { FirstName = "Benas", LastName = "Orlovas", Email = "benas.orlovas@yahoo.com", Phone = "+37061148987"});
+            AddContact(new Contact() { FirstName = "Povilas", LastName = "Zvirblis", Email = "povilas.zvirblis@inbox.com", Phone="+37065478968"});
         }
 
         public Contact AddContact(Contact contact)
@@ -49,6 +49,10 @@ namespace ContactsApp.Contact_Access
             return contacts;
         }
 
+        public void Update(Contact contact)
+        {
+            contacts[contact.Id] = contact;
+        }
 
     }
 
