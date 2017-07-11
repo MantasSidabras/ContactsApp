@@ -1,16 +1,15 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Web;
 using System.Web.Http;
 
-namespace ContactsApp.App_Start
+namespace ContactsAppWebApi
 {
-    public class WebApiConfig
+    public static class WebApiConfig
     {
         public static void Register(HttpConfiguration config)
         {
-            // TODO: Add any additional configuration code.
+            // Web API configuration and services
 
             // Web API routes
             config.MapHttpAttributeRoutes();

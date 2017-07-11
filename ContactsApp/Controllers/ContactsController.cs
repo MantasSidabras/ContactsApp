@@ -4,9 +4,9 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using System.Text;
-using ContactsApp.Contact_Access;
 using ContactsApp.Data.Intefaces;
 using ContactsApp.Data.Models;
+using ContactsApp.Data.Contact_Repository;
 
 namespace ContactsApp.Controllers
 {

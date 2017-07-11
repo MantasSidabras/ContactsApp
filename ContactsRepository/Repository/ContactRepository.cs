@@ -5,12 +5,12 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 
-namespace ContactsApp.Contact_Access
+namespace ContactsApp.Data.Contact_Repository
 {
     public class ContactRepository : IContactRepository
     {
         private static Dictionary<int, Contact> _contacts = new Dictionary<int, Contact>();
-        private int _id = 0;
+        private static int _id = 0;
 
         public ContactRepository()
         {
