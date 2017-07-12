@@ -38,32 +38,51 @@ namespace WebApp.Controllers
         [Route("Contacts/{id}")]
         // GET: api/Contact/5
         [HttpGet]
-        public Contact Get(int id)
+        public IHttpActionResult Get(int id)
         {
-            return _contactRepository.GetContact(id);
+            return Ok(_contactRepository.GetContact(id));
         }
 
-        
+
         [Route("Contacts/Create")]
         // POST: api/Contact
         [HttpPost]
-        public void Post([FromBody]Contact value)
+        public IHttpActionResult Post([FromBody]Contact value)
         {
+            if (value == null)
+            {
+                return BadRequest();
+            }
+
             _contactRepository.AddContact(value);
+            return Ok();
         }
 
-        // PUT: api/Contact/5
-        [HttpPut]
-        public void Put(int id, [FromBody]string value)
-        {
-        }
+        [Route("Contacts/Update")]
+        [HttpPut] 
+         public IHttpActionResult Put(Contact contact)
+         {  
+            if(contact == null)
+            {
+                return BadRequest();
+            }
+             _contactRepository.Update(contact); 
+             return Ok(contact); 
+         }
 
-        // DELETE: api/Contact/5
-        [Route("Contacts/Delete/{id}")]
+
+    // DELETE: api/Contact/5
+    [Route("Contacts/Delete/{id}")]
         [HttpDelete]
-        public void Delete(int id)
+        public IHttpActionResult Delete(int id)
         {
+            var contact = _contactRepository.GetContact(id);
+            if (contact == null)
+            {
+                return BadRequest();
+            }
             _contactRepository.DeleteContact(id);
+            return Ok(contact);
         }
     }
 }
