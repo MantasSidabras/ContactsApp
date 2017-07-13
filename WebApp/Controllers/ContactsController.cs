@@ -57,20 +57,20 @@ namespace WebApp.Controllers
         }
 
         [Route("Contacts/Update")]
-        [HttpPut] 
-         public IHttpActionResult Put(Contact contact)
-         {  
-            if(contact == null)
+        [HttpPut]
+        public IHttpActionResult Put(Contact contact)
+        {
+            if (contact == null)
             {
                 return BadRequest();
             }
-             _contactRepository.Update(contact); 
-             return Ok(contact); 
-         }
+            _contactRepository.Update(contact);
+            return Ok(contact);
+        }
 
 
-    // DELETE: api/Contact/5
-    [Route("Contacts/Delete/{id}")]
+        // DELETE: api/Contact/5
+        [Route("Contacts/Delete/{id}")]
         [HttpDelete]
         public IHttpActionResult Delete(int id)
         {
@@ -82,5 +82,19 @@ namespace WebApp.Controllers
             _contactRepository.DeleteContact(id);
             return Ok(contact);
         }
+
+        [Route("Contacts/Message/{id}")]
+        [HttpPost]
+        public IHttpActionResult PostMessage(Message message)
+        {
+            if(message == null)
+            {
+                return BadRequest();
+            }
+            //SEND Message
+            _contactRepository.AddMessage(message); // Adds message record to database
+            return Ok(message);
+        }
     }
+
 }

@@ -54,16 +54,16 @@ app.controller('contactEditController', function ($http, $routeParams, $location
 });
 
 
-//app.controller('messageController', function ($scope, $http) {
-//    $scope.contact = {};
+app.controller('messageController', function ($scope, $http) {
+    $scope.message = {};
 
-//    var self = this;
-//    var uriCreate = 'http://localhost:64014/Contacts/Create';
+    var self = this;
+    var uriCreate = 'http://localhost:64014/Contacts/Create';
 
-//    $scope.create = function () {
-//        $http.post(uriCreate, $scope.contact);
-//    };
-//});
+    $scope.create = function () {
+        $http.post(uriCreate, $scope.contact);
+    };
+});
 
 
 app.config(function ($routeProvider, $locationProvider) {

@@ -84,6 +84,17 @@ namespace ContactsApp.Data.Contact_Repository
             }
         }
 
+        public Message AddMessage(Message message)
+        {
+            using(_context = new ContactsDbEntities())
+            {
+                _context.Messages.Add(message);
+                _context.SaveChanges();
+            }
+            return message;
+        }
+
+
     }
 
 }
