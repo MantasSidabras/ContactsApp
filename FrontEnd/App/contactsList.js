@@ -54,15 +54,25 @@ app.controller('contactEditController', function ($http, $routeParams, $location
 });
 
 
-app.controller('messageController', function ($scope, $http) {
-    $scope.message = {};
-
+app.controller('messageController', function ($scope, $http, $location) {
     var self = this;
-    var uriCreate = 'http://localhost:64014/Contacts/Create';
+    var uri = 'http://localhost:64014/Contacts';
+    $http.get(uri).then(function (response) { self.contacts = response.data; });
 
-    $scope.create = function () {
-        $http.post(uriCreate, $scope.contact);
+    var message = {};
+    self.sendMsg = function (contactId) {
+        self.message.ContactId = contactId;
+
+        $http({
+            method: 'POST',
+            url: 'http://localhost:64014/Contacts/Message',
+            data: self.message
+        }).then(function () {
+            $location.path("/");
+        });
+            
     };
+
 });
 
 
@@ -72,7 +82,7 @@ app.config(function ($routeProvider, $locationProvider) {
         .when('/', { controller: 'contactsController', templateUrl: '/App/Templates/List.html' })
         .when('/create', { controller: 'contactCreateController', templateUrl: '/App/Templates/Create.html' })
         .when('/edit/:id', { controller: 'contactEditController', templateUrl: '/App/Templates/Edit.html' })
-        .when('/message', { controller: 'contactsController', templateUrl: '/App/Templates/Message.html'});
+        .when('/message', { controller: 'messageController', templateUrl: '/App/Templates/Message.html' });
 });
 
 

@@ -2,19 +2,18 @@
     <h2>Create</h2>
     <form ng-controller="contactCreateController as vm">
         <br />
-        <input type="text" ng-model="contact.FirstName" placeholder="first name" required pattern="[A-Za-z]+" title="First name can only consist of letters." />
+        <input type="text" class="form-control" ng-model="contact.FirstName" placeholder="first name" required pattern="[A-Za-z]+" title="First name can only consist of letters." />
         <br />
         <br />
-        <input type="text" ng-model="contact.LastName" placeholder="last name" required pattern="[A-Za-z]+" title="Last name can only consist of letters." />
+        <input type="text" class="form-control" ng-model="contact.LastName" placeholder="last name" required pattern="[A-Za-z]+" title="Last name can only consist of letters." />
         <br />
         <br />
-        <input type="text" ng-model="contact.Email" placeholder="email" required pattern="^\S+@\S+$" title="Incorrect email." />
+        <input type="text" class="form-control" ng-model="contact.Email" placeholder="email" required pattern="^\S+@\S+$" title="Incorrect email." />
         <br />
         <br />
-        
-        <input type="text" ng-model="contact.Phone" placeholder="phone" required pattern="\+?\d+" title="phone number is not valid" />
+        <input type="text" class="form-control" ng-model="contact.Phone" placeholder="phone" required pattern="\+?\d+" title="phone number is not valid" />
         <br /><br />
-        <input type="button" ng-click="create(contact)" value="Create">
+        <input type="button" class="btn btn-success" ng-click="create(contact)" value="Create" />
     </form>
 </div>
 

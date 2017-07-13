@@ -1,16 +1,19 @@
-﻿<h2>Edit</h2>
-<form ng-controller="contactEditController as vm" ng-submit="vm.edit()">
-    <br>
-    <input type="text" ng-model="vm.contact.FirstName" value="{{vm.contact.FirstName}}" required pattern="[A-Za-z]+" title="First name can only consist of letters." />
-    <br>
-    <br>
-    <input type="text" ng-model="vm.contact.LastName" value="{{vm.contact.LastName}}" required pattern="[A-Za-z]+" title="Last name can only consist of letters." />
-    <br>
-    <br>
-    <input type="text" ng-model="vm.contact.Email" value="{{vm.contact.Email}}" required pattern="^\S+@\S+$" title="Incorrect email." />
-    <br>
-    <br>
-    <input type="text" ng-model="vm.contact.Phone" value="{{vm.contact.Phone}}" required pattern="\+?\d+" title="phone number is not valid" />
-    <br><br>
-    <input type="button" ng-click="vm.edit(item)" value="Save">
-</form>
+﻿<div class="container">
+    <h2>Edit</h2>
+    <form ng-controller="contactEditController as vm" ng-submit="vm.edit()">
+        <br />
+        <input type="text" class="form-control" ng-model="vm.contact.FirstName" value="{{vm.contact.FirstName}}" required pattern="[A-Za-z]+" title="First name can only consist of letters." />
+        <br />
+        <br />
+        <input type="text" class="form-control" ng-model="vm.contact.LastName" value="{{vm.contact.LastName}}" required pattern="[A-Za-z]+" title="Last name can only consist of letters." />
+        <br />
+        <br />
+        <input type="text" class="form-control" ng-model="vm.contact.Email" value="{{vm.contact.Email}}" required pattern="^\S+@\S+$" title="Incorrect email." />
+        <br />
+        <br />
+        <input type="text" class="form-control" ng-model="vm.contact.Phone" value="{{vm.contact.Phone}}" required pattern="\+?\d+" title="phone number is not valid" />
+        <br />
+        <br />
+        <input type="button" class="btn btn-success" ng-click="vm.edit()" value="Save" />
+    </form>
+</div>

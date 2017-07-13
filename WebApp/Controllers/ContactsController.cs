@@ -83,9 +83,9 @@ namespace WebApp.Controllers
             return Ok(contact);
         }
 
-        [Route("Contacts/Message/{id}")]
+        [Route("Contacts/Message")]
         [HttpPost]
-        public IHttpActionResult PostMessage(Message message)
+        public IHttpActionResult PostMessage([FromBody]Message message)
         {
             if(message == null)
             {

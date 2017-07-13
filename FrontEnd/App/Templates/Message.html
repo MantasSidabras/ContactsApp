@@ -1,14 +1,17 @@
 ﻿
-<div class="container">
+<div class="container" ng-controller="messageController as vm">
     <h2>Message</h2>
-    <input type="text" placeholder="search contact" required/>
+    <br />
+    <select class="form-control" ng-model="vm.selectedContact" ng-options="x.Email for x in vm.contacts">
+        <option value="">Email</option>
+    </select>
     <br /><br />
-    <input type="text" placeholder="subject" />
+    <input class="form-control" type="text" ng-model="vm.message.Subject" placeholder="subject" />
     <br /><br />
-    <textarea rows="10" cols="50" placeholder="Text"></textarea>
+    <textarea class="form-control" rows="10" ng-model="vm.message.Text" cols="50" placeholder="Text"></textarea>
     <br /><br />
-    <input type="button" value="Send">
-    <input type="button" value="Clear" />
+    <input type="button" class="btn btn-success" ng-click="vm.sendMsg(vm.selectedContact.Id)" value="Send" />
+    <input type="button" class="btn btn-warning" value="Clear" />
 </div>
 
 
