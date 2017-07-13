@@ -1,13 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Net;
-using System.Net.Http;
-using System.Web.Http;
+﻿using ContactsApp.Data.Contact_Repository;
 using ContactsApp.Data.Intefaces;
-using ContactsApp.Data.Contact_Repository;
-using ContactsApp.Data.Models;
+using ContactsRepository;
+using System.Collections.Generic;
+using System.Web.Http;
 using System.Web.Http.Cors;
+
 
 namespace WebApp.Controllers
 {
@@ -32,7 +29,8 @@ namespace WebApp.Controllers
         [HttpGet]
         public IEnumerable<Contact> Get()
         {
-            return _contactRepository.GetContacts();
+            var x = _contactRepository.GetContacts();
+            return x;
         }
 
         [Route("Contacts/{id}")]

@@ -1,17 +1,19 @@
-﻿<table class="table" ng-controller="contactsController as vm">
-    <tr>
-        <th>FirstName</th>
-        <th>LastName</th>
-        <th>Email</th>
-        <th>Phone</th>
-    </tr>
-    <tr ng-repeat="item in vm.contacts">
-        <td hidden>{{item.Id}}</td>
-        <td>{{item.FirstName}}</td>
-        <td>{{item.LastName}}</td>
-        <td>{{item.Email}}</td>
-        <td>{{item.Phone}}</td>
-        <td><a href="/edit/{{item.Id}}">Edit</a></td>
-        <td><a href="#" ng-click="remove(item)">Delete</a></td>
-    </tr>
-</table>
+﻿<div class="container">
+    <table class="table" ng-controller="contactsController as vm">
+        <tr>
+            <th>FirstName</th>
+            <th>LastName</th>
+            <th>Email</th>
+            <th>Phone</th>
+        </tr>
+        <tr ng-repeat="item in vm.contacts">
+            <td hidden>{{item.Id}}</td>
+            <td>{{item.FirstName}}</td>
+            <td>{{item.LastName}}</td>
+            <td>{{item.Email}}</td>
+            <td>{{item.Phone}}</td>
+            <td><a href="/edit/{{item.Id}}">Edit</a></td>
+            <td><a href="#" ng-click="remove(item)">Delete</a></td>
+        </tr>
+    </table>
+</div>
