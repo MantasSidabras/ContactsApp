@@ -1,4 +1,4 @@
-﻿using ContactsApp.Data.Contact_Repository;
+﻿using ContactsApp.Data.ContactRepository;
 using ContactsApp.Data.Intefaces;
 using ContactsApp.Data.Models;
 using System;

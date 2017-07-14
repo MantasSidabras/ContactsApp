@@ -3,12 +3,10 @@ using System.Collections.Generic;
 using ContactsRepository;
 using System.Linq;
 
-namespace ContactsApp.Data.Contact_Repository
+namespace ContactsApp.Data.ContactRepository
 {
     public class ContactRepository : IContactRepository
     {
-        private static Dictionary<int, Contact> _contacts = new Dictionary<int, Contact>();
-        //private static int _id = 0;
         private ContactsDbEntities _context;
 
         public ContactRepository()
@@ -25,8 +23,6 @@ namespace ContactsApp.Data.Contact_Repository
             }
             using (_context = new ContactsDbEntities())
             {
-                //contact.Id = _id;
-                // _id++;
                 _context.Contacts.Add(contact);
                 _context.SaveChanges();
             }
@@ -61,9 +57,7 @@ namespace ContactsApp.Data.Contact_Repository
         {
             using (_context = new ContactsDbEntities())
             {
-                //_context.Configuration.LazyLoadingEnabled = false;
-                var a = _context.Contacts.ToList();
-                return a;
+                return _context.Contacts.ToList();
             }
         }
 
@@ -92,6 +86,14 @@ namespace ContactsApp.Data.Contact_Repository
                 _context.SaveChanges();
             }
             return message;
+        }
+
+        public IEnumerable<Message> GetMessages()
+        {
+            using(_context = new ContactsDbEntities())
+            {
+                return _context.Messages.ToList();
+            }
         }
 
 

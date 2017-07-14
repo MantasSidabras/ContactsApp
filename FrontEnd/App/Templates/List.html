@@ -1,8 +1,8 @@
 ﻿<div class="container">
     <table class="table" ng-controller="contactsController as vm">
         <tr>
-            <th>FirstName</th>
-            <th>LastName</th>
+            <th>First name</th>
+            <th>Last name</th>
             <th>Email</th>
             <th>Phone</th>
         </tr>
@@ -13,7 +13,7 @@
             <td>{{item.Email}}</td>
             <td>{{item.Phone}}</td>
             <td><a href="/edit/{{item.Id}}">Edit</a></td>
-            <td><a href="#" ng-click="remove(item)">Delete</a></td>
+            <td><a href="#" ng-click="vm.remove(item)">Delete</a></td>
         </tr>
     </table>
 </div>

@@ -1,4 +1,4 @@
-﻿using ContactsApp.Data.Contact_Repository;
+﻿using ContactsApp.Data.ContactRepository;
 using ContactsApp.Data.Intefaces;
 using ContactsRepository;
 using System.Collections.Generic;
@@ -27,15 +27,15 @@ namespace WebApp.Controllers
         [Route("Contacts")]
         // GET: api/Contact
         [HttpGet]
-        public IEnumerable<Contact> Get()
+        public IHttpActionResult Get()
         {
-            var x = _contactRepository.GetContacts();
-            return x;
+            return Ok(_contactRepository.GetContacts());
         }
 
         [Route("Contacts/{id}")]
         // GET: api/Contact/5
         [HttpGet]
+
         public IHttpActionResult Get(int id)
         {
             return Ok(_contactRepository.GetContact(id));
@@ -83,18 +83,7 @@ namespace WebApp.Controllers
             return Ok(contact);
         }
 
-        [Route("Contacts/Message")]
-        [HttpPost]
-        public IHttpActionResult PostMessage([FromBody]Message message)
-        {
-            if(message == null)
-            {
-                return BadRequest();
-            }
-            //SEND Message
-            _contactRepository.AddMessage(message); // Adds message record to database
-            return Ok(message);
-        }
+        
     }
 
 }

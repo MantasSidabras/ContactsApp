@@ -6,7 +6,7 @@ using System.Web.Mvc;
 using System.Text;
 using ContactsApp.Data.Intefaces;
 using ContactsApp.Data.Models;
-using ContactsApp.Data.Contact_Repository;
+using ContactsApp.Data.ContactRepository;
 
 namespace ContactsApp.Controllers
 {

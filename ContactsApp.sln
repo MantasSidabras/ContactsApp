@@ -7,9 +7,9 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ContactsApp", "ContactsApp\
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ContactsApp.Data", "ContactsRepository\ContactsApp.Data.csproj", "{F39AF105-621F-4F99-AD7A-768DC6456F9B}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FrontEnd", "FrontEnd\FrontEnd.csproj", "{A7895EDF-7834-4621-A428-792012ECB3D5}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ContactsApp.FrontEnd", "FrontEnd\ContactsApp.FrontEnd.csproj", "{A7895EDF-7834-4621-A428-792012ECB3D5}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebApi", "WebApp\WebApi.csproj", "{1A852231-73E8-49EB-A6A6-ACA1C8A90408}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ContactsApp.Api", "WebApp\ContactsApp.Api.csproj", "{1A852231-73E8-49EB-A6A6-ACA1C8A90408}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

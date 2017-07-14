@@ -1,0 +1,16 @@
+﻿<div class="container">
+    <h2>Messages</h2>
+    <table class="table" ng-controller="messageController as vm" ng-init="vm.getAllMsg()">
+        <tr>
+            <th>Email</th>
+            <th>Subject</th>
+            <th>Text</th>
+        </tr>
+        <tr ng-repeat="item in vm.messageList">
+            <td>{{vm.getEmail(item.ContactId)}}</td>
+            <td>{{item.Subject}}</td>
+            <td>{{item.Text}}</td>
+            <td><a href="#">Delete</a></td>
+        </tr>
+    </table>
+</div>

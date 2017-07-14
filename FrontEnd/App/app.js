@@ -1,29 +1,35 @@
 ﻿var app = angular.module('contactApp', ['ngRoute']);
 
-app.controller('contactsController', ['$scope', '$http', function ($scope, $http) {
+app.controller('contactsController', ['$scope', '$http', function ($scope, $http, $location) {
 
     var self = this;
     var uri = 'http://localhost:64014/Contacts';
     $http.get(uri).then(function (response) { self.contacts = response.data; });
 
     var uriDelete = 'http://localhost:64014/Contacts/Delete';
-    $scope.remove = function (contact) {
+    self.remove = function (contact) {
         $http.delete(uriDelete + '/' + contact.Id).then(function (response) {
             var index = self.contacts.indexOf(contact);
             self.contacts.splice(index, 1);
+        }).then(function () {
+            $location.path("/");
+        });
+
+        $http({
+            method: 'DELETE',
+
+
         });
     };
 }]);
 
 app.controller('contactCreateController', function ($scope, $http, $location) {
-    $scope.contact = {};
-
     var self = this;
     var uriCreate = 'http://localhost:64014/Contacts/Create';
 
-    $scope.create = function () {
-        $http.post(uriCreate, $scope.contact).then(
-            function (response) {
+    self.create = function () {
+        $http.post(uriCreate, self.contact).then(
+            function () {
                 $location.path("/");
             });
     };
@@ -65,13 +71,31 @@ app.controller('messageController', function ($scope, $http, $location) {
 
         $http({
             method: 'POST',
-            url: 'http://localhost:64014/Contacts/Message',
+            url: 'http://localhost:64014/Messages',
             data: self.message
         }).then(function () {
             $location.path("/");
         });
-            
     };
+
+    self.getEmail = function (contactId) {
+
+        var result = false;
+        angular.forEach(self.contacts, function (contact, key) {
+            if (contactId == contact.Id)
+                result = contact.Email;
+        });
+        return result;
+    };
+
+    self.getAllMsg = function () {
+        $http({
+            method: 'GET',
+            url: 'http://localhost:64014/Messages'
+        }).then(function (response) {
+            self.messageList = response.data;
+        });
+    }
 
 });
 
@@ -82,9 +106,12 @@ app.config(function ($routeProvider, $locationProvider) {
         .when('/', { controller: 'contactsController', templateUrl: '/App/Templates/List.html' })
         .when('/create', { controller: 'contactCreateController', templateUrl: '/App/Templates/Create.html' })
         .when('/edit/:id', { controller: 'contactEditController', templateUrl: '/App/Templates/Edit.html' })
-        .when('/message', { controller: 'messageController', templateUrl: '/App/Templates/Message.html' });
+        .when('/message', { controller: 'messageController', templateUrl: '/App/Templates/Message.html' })
+        .when('/message/all', { controller: 'messageController', templateUrl: '/App/Templates/MessageList.html' });
 });
 
-
+app.config(['$qProvider', function ($qProvider) {
+    $qProvider.errorOnUnhandledRejections(false);
+}]);
 
 

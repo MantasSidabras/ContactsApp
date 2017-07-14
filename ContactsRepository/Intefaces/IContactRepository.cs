@@ -12,5 +12,6 @@ namespace ContactsApp.Data.Intefaces
         IEnumerable<Contact> GetContacts();
         void Update(Contact contact);
         Message AddMessage(Message message);
+        IEnumerable<Message> GetMessages();
     }
 }
