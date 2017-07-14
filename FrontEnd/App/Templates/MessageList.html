@@ -10,7 +10,7 @@
             <td>{{vm.getEmail(item.ContactId)}}</td>
             <td>{{item.Subject}}</td>
             <td>{{item.Text}}</td>
-            <td><a href="#">Delete</a></td>
+            <td><a href="#/messages/all" ng-click="vm.remove(item)" >Delete</a></td>
         </tr>
     </table>
 </div>

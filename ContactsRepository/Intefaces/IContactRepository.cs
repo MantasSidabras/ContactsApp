@@ -13,5 +13,7 @@ namespace ContactsApp.Data.Intefaces
         void Update(Contact contact);
         Message AddMessage(Message message);
         IEnumerable<Message> GetMessages();
+        Message GetMessage(int id);
+        void DeleteMessage(int id);
     }
 }

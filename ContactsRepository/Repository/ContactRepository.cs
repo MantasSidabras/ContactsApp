@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using ContactsRepository;
 using System.Linq;
+using System;
 
 namespace ContactsApp.Data.ContactRepository
 {
@@ -96,7 +97,30 @@ namespace ContactsApp.Data.ContactRepository
             }
         }
 
+        public Message GetMessage(int id)
+        {
+            using(_context = new ContactsDbEntities())
+            {
+                var message = (from msg in _context.Messages
+                               where msg.Id == id
+                               select msg).FirstOrDefault();
+                return message;
+            }
+        }
 
+        public void DeleteMessage(int id)
+        {
+            using(_context = new ContactsDbEntities())
+            {
+                var msgToDelete = (from msg in _context.Messages
+                                   where msg.Id == id
+                                   select msg).FirstOrDefault();
+                _context.Messages.Remove(msgToDelete);
+                _context.SaveChanges();
+            }
+        }
+
+        
     }
 
 }

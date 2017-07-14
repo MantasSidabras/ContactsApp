@@ -82,7 +82,7 @@ app.controller('messageController', function ($scope, $http, $location) {
 
         var result = false;
         angular.forEach(self.contacts, function (contact, key) {
-            if (contactId == contact.Id)
+            if (contactId === contact.Id)
                 result = contact.Email;
         });
         return result;
@@ -97,6 +97,15 @@ app.controller('messageController', function ($scope, $http, $location) {
         });
     }
 
+    self.remove = function (msg) {
+        $http({
+            method: 'DELETE',
+            url: 'http://localhost:64014/Messages',
+            params: { id: msg.Id }
+        }).then(function () {
+            $location.path("/message/all");
+        });
+    }
 });
 
 

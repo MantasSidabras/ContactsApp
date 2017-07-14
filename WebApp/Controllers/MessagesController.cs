@@ -41,11 +41,18 @@ namespace ContactsApp.Api.Controllers
             _contactRepository.AddMessage(message); // Adds message record to database
             return Ok(message);
         }
-
-
-
-
-
-
+        
+        [Route("Messages")]
+        [HttpDelete]
+        public IHttpActionResult DeleteMessage(int id)
+        {
+            var msg = _contactRepository.GetMessage(id);
+            if (msg == null)
+            {
+                return BadRequest();
+            }
+            _contactRepository.DeleteMessage(id);
+            return Ok();
+        }
     }
 }
