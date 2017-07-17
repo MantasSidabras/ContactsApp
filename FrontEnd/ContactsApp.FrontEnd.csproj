@@ -65,6 +65,7 @@
     <Reference Include="System.EnterpriseServices" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="App\Templates\Login.html" />
     <Content Include="App\Templates\Message.html" />
     <Content Include="App\Templates\MessageList.html" />
     <Content Include="packages.config" />

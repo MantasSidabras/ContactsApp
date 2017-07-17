@@ -14,15 +14,15 @@ namespace WebApp.Controllers
 
         private readonly IContactRepository _contactRepository;
 
-        //public ContactsController(IContactRepository contactRepository)
-        //{
-        //    _contactRepository = contactRepository;
-        //}
-
-        public ContactsController()
+        public ContactsController(IContactRepository contactRepository)
         {
-            _contactRepository = new ContactRepository();
+            _contactRepository = contactRepository;
         }
+
+        //public ContactsController()
+        //{
+        //    _contactRepository = new ContactRepository();
+        //}
 
         [Route("Contacts")]
         // GET: api/Contact

@@ -109,6 +109,59 @@ app.controller('messageController', function ($scope, $http, $location) {
 });
 
 
+app.controller('loginController', function ($scope, $http) {
+    var self = this;
+    self.facebook = {
+        usename: '',
+        password: ''
+    };
+    self.OnFBLogin = function () {
+        FB.login(function (response) {
+            if (response.authResponse) {
+                FB.api('/me', 'GET', { fields: 'email' }, function (response) {
+                    self.$apply(function () {
+                        $facebook.email = response.email;
+
+                    });
+                });
+            }
+        }, {
+                scope: 'email',
+                return_scopes: true
+            });
+    }
+
+});
+
+window.fbAsyncInit = function () {
+    FB.init({
+        appId: '1376825639104971',
+        autoLogAppEvents: true,
+        xfbml: true,
+        version: 'v2.9',
+        status: true
+    });
+
+    FB.getLoginStatus(function (response) {
+        if (response.status === 'connected') {
+            console.log('fb connected');
+        } else if (response.status === 'not_authorized') {
+            console.log('not authorized');
+        }
+    });
+};
+
+(function (d, s, id) {
+    var js, fjs = d.getElementsByTagName(s)[0];
+    if (d.getElementById(id)) { return; }
+    js = d.createElement(s); js.id = id;
+    js.src = "//connect.facebook.net/en_US/sdk.js";
+    fjs.parentNode.insertBefore(js, fjs);
+}(document, 'script', 'facebook-jssdk'));
+
+
+
+
 app.config(function ($routeProvider, $locationProvider) {
     $locationProvider.html5Mode(true);
     $routeProvider
@@ -116,7 +169,10 @@ app.config(function ($routeProvider, $locationProvider) {
         .when('/create', { controller: 'contactCreateController', templateUrl: '/App/Templates/Create.html' })
         .when('/edit/:id', { controller: 'contactEditController', templateUrl: '/App/Templates/Edit.html' })
         .when('/message', { controller: 'messageController', templateUrl: '/App/Templates/Message.html' })
-        .when('/message/all', { controller: 'messageController', templateUrl: '/App/Templates/MessageList.html' });
+        .when('/message/all', { controller: 'messageController', templateUrl: '/App/Templates/MessageList.html' })
+        .when('/login', { controller: 'loginController', templateUrl: '/App/Templates/Login.html' });
+
+
 });
 
 app.config(['$qProvider', function ($qProvider) {

@@ -16,9 +16,9 @@ namespace ContactsApp.Api.Controllers
     {
         private readonly IContactRepository _contactRepository;
 
-        public MessagesController()
+        public MessagesController(IContactRepository contactRepository)
         {
-            _contactRepository = new ContactRepository();
+            _contactRepository = contactRepository;
         }
 
         [Route("Messages")]
