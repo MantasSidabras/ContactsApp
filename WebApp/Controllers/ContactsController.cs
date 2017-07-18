@@ -11,7 +11,6 @@ namespace WebApp.Controllers
     [EnableCors(origins: "*", headers: "*", methods: "*")]
     public class ContactsController : ApiController
     {
-
         private readonly IContactRepository _contactRepository;
 
         public ContactsController(IContactRepository contactRepository)
@@ -24,8 +23,8 @@ namespace WebApp.Controllers
         //    _contactRepository = new ContactRepository();
         //}
 
+        [Authorize]
         [Route("Contacts")]
-        // GET: api/Contact
         [HttpGet]
         public IHttpActionResult Get()
         {
@@ -33,7 +32,6 @@ namespace WebApp.Controllers
         }
 
         [Route("Contacts/{id}")]
-        // GET: api/Contact/5
         [HttpGet]
 
         public IHttpActionResult Get(int id)
@@ -43,7 +41,6 @@ namespace WebApp.Controllers
 
 
         [Route("Contacts/Create")]
-        // POST: api/Contact
         [HttpPost]
         public IHttpActionResult Post([FromBody]Contact value)
         {
@@ -68,8 +65,6 @@ namespace WebApp.Controllers
             return Ok(contact);
         }
 
-
-        // DELETE: api/Contact/5
         [Route("Contacts/Delete/{id}")]
         [HttpDelete]
         public IHttpActionResult Delete(int id)
@@ -83,7 +78,8 @@ namespace WebApp.Controllers
             return Ok(contact);
         }
 
-        
+
+
     }
 
 }

@@ -3,25 +3,29 @@
 app.controller('contactsController', ['$scope', '$http', function ($scope, $http, $location) {
 
     var self = this;
-    var uri = 'http://localhost:64014/Contacts';
-    $http.get(uri).then(function (response) { self.contacts = response.data; });
+
+    $http({
+        method: 'GET',
+        url: 'http://localhost:64014/Contacts'
+    }).then(function (response) { self.contacts = response.data; });
 
     var uriDelete = 'http://localhost:64014/Contacts/Delete';
+
     self.remove = function (contact) {
-        $http.delete(uriDelete + '/' + contact.Id).then(function (response) {
+        $http({
+            method: 'DELETE',
+            url: 'http://localhost:64014/Contacts/Delete',
+            params: contact.Id
+
+        }).then(function (response) {
             var index = self.contacts.indexOf(contact);
             self.contacts.splice(index, 1);
         }).then(function () {
             $location.path("/");
         });
-
-        $http({
-            method: 'DELETE',
-
-
-        });
     };
 }]);
+
 
 app.controller('contactCreateController', function ($scope, $http, $location) {
     var self = this;
@@ -109,57 +113,22 @@ app.controller('messageController', function ($scope, $http, $location) {
 });
 
 
-app.controller('loginController', function ($scope, $http) {
+app.controller('loginController', function ($scope, $http, $location) {
     var self = this;
-    self.facebook = {
-        usename: '',
-        password: ''
-    };
-    self.OnFBLogin = function () {
-        FB.login(function (response) {
-            if (response.authResponse) {
-                FB.api('/me', 'GET', { fields: 'email' }, function (response) {
-                    self.$apply(function () {
-                        $facebook.email = response.email;
 
-                    });
-                });
-            }
-        }, {
-                scope: 'email',
-                return_scopes: true
-            });
+    self.OnFBLogin = function () {
+        $http({
+            method: 'GET',
+            url: 'http://localhost:64014/Login'
+
+        }).then(function () {
+            $location.path("/");
+
+        });
     }
 
+
 });
-
-window.fbAsyncInit = function () {
-    FB.init({
-        appId: '1376825639104971',
-        autoLogAppEvents: true,
-        xfbml: true,
-        version: 'v2.9',
-        status: true
-    });
-
-    FB.getLoginStatus(function (response) {
-        if (response.status === 'connected') {
-            console.log('fb connected');
-        } else if (response.status === 'not_authorized') {
-            console.log('not authorized');
-        }
-    });
-};
-
-(function (d, s, id) {
-    var js, fjs = d.getElementsByTagName(s)[0];
-    if (d.getElementById(id)) { return; }
-    js = d.createElement(s); js.id = id;
-    js.src = "//connect.facebook.net/en_US/sdk.js";
-    fjs.parentNode.insertBefore(js, fjs);
-}(document, 'script', 'facebook-jssdk'));
-
-
 
 
 app.config(function ($routeProvider, $locationProvider) {
