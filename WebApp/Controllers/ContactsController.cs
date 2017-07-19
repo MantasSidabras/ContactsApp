@@ -8,7 +8,9 @@ using System.Web.Http.Cors;
 
 namespace WebApp.Controllers
 {
-    [EnableCors(origins: "*", headers: "*", methods: "*")]
+
+    [Authorize]
+    //[EnableCors(origins: "*", headers: "*", methods: "*")]
     public class ContactsController : ApiController
     {
         private readonly IContactRepository _contactRepository;
@@ -23,7 +25,7 @@ namespace WebApp.Controllers
         //    _contactRepository = new ContactRepository();
         //}
 
-        [Authorize]
+        
         [Route("Contacts")]
         [HttpGet]
         public IHttpActionResult Get()

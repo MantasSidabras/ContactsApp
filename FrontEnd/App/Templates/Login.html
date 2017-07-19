@@ -1,5 +1,5 @@
-﻿<div class="container" ng-controller="loginController">
+﻿<div class="container" ng-controller="loginController as vm">
     <h2>Login</h2>
-    <!--<input href="http://localhost:64014/Login" type="button" class="btn btn-default" value="login with facebook"/>-->
-    <a href="http://localhost:64014/Login">fb login</a>
+    <input type="button" class="btn btn-default" ng-click="vm.login()" value="login with facebook"/>
+    <!--<a href="http://localhost:64014/Login">fb login</a>-->
 </div>

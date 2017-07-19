@@ -9,6 +9,7 @@ using System.Web.Http.Cors;
 
 namespace WebApp.Controllers
 {
+    
     [EnableCors(origins: "*", headers: "*", methods: "*")]
     public class LoginController : ApiController
     {
@@ -20,11 +21,13 @@ namespace WebApp.Controllers
             return Ok("Unauthorized!");
         }
 
+        
+        [Route("Login/{uri}")]
         [HttpGet]
-        [Route("Login")]
-        public HttpResponseMessage Login()
+        public HttpResponseMessage Login(string uri)
         {
-            var properties = new AuthenticationProperties() { RedirectUri = "Contacts" };
+            uri = @"http://localhost:" + uri;
+            var properties = new AuthenticationProperties() { RedirectUri = uri };
             Request.GetOwinContext().Authentication.Challenge(properties, "Facebook");
 
             HttpResponseMessage response = new HttpResponseMessage(HttpStatusCode.Unauthorized);

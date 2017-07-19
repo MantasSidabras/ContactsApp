@@ -11,7 +11,8 @@ using ContactsApp.Data.ContactRepository;
 
 namespace ContactsApp.Api.Controllers
 {
-    [EnableCors(origins: "*", headers: "*", methods: "*")]
+    [Authorize]
+    //[EnableCors(origins: "*", headers: "*", methods: "*")]
     public class MessagesController : ApiController
     {
         private readonly IContactRepository _contactRepository;
@@ -25,8 +26,7 @@ namespace ContactsApp.Api.Controllers
         [HttpGet]
         public IHttpActionResult GetMessages()
         {
-            var x = _contactRepository.GetMessages();
-            return Ok(x);
+            return Ok(_contactRepository.GetMessages());
         }
 
         [Route("Messages")]

@@ -113,26 +113,30 @@ app.controller('messageController', function ($scope, $http, $location) {
 });
 
 
-app.controller('loginController', function ($scope, $http, $location) {
+app.controller('loginController', function ($scope, $http, $window, $location) {
     var self = this;
+    var uri = 'http://localhost:64014/Login';
+    var redirectUri = '63994';
 
-    self.OnFBLogin = function () {
-        $http({
-            method: 'GET',
-            url: 'http://localhost:64014/Login'
-
-        }).then(function () {
-            $location.path("/");
-
-        });
-    }
-
-
+    $window.location.href = uri + '/' + redirectUri;
+    
 });
 
+//app.controller("loginController", function ($scope, $http, $window) {
+//    $scope.providers = [];
+//    var baseURI = "http://localhost:50079";
 
-app.config(function ($routeProvider, $locationProvider) {
+//    $scope.login = function () {
+//        $window.location.href = baseURI + "/Login";
+//    };
+
+//});
+
+
+
+app.config(function ($routeProvider, $locationProvider, $httpProvider) {
     $locationProvider.html5Mode(true);
+    $httpProvider.defaults.withCredentials = true; //siunciant uzklausa i API pridedamas autetifikacijos cookies
     $routeProvider
         .when('/', { controller: 'contactsController', templateUrl: '/App/Templates/List.html' })
         .when('/create', { controller: 'contactCreateController', templateUrl: '/App/Templates/Create.html' })
@@ -142,7 +146,21 @@ app.config(function ($routeProvider, $locationProvider) {
         .when('/login', { controller: 'loginController', templateUrl: '/App/Templates/Login.html' });
 
 
-});
+})
+    .service('authInterceptor', function ($q) { //custom interceptorius
+        var service = this;
+
+        service.responseError = function (response) {
+            if (response.status === 401) { //jeigu is api gauname 401 (unauthorised) errora 
+                window.location = "/login"; //redirectiname useri i login langa
+            }
+            return $q.reject(response);
+        };
+    })
+    .config(['$httpProvider', function ($httpProvider) {
+        $httpProvider.interceptors.push('authInterceptor'); //interceptorius
+    }]);
+
 
 app.config(['$qProvider', function ($qProvider) {
     $qProvider.errorOnUnhandledRejections(false);

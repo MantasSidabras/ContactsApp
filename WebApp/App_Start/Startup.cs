@@ -5,6 +5,7 @@ using Owin;
 using Microsoft.Owin.Security.Cookies;
 using Microsoft.AspNet.Identity;
 using Microsoft.Owin.Security.Facebook;
+using System.Web.Http;
 
 [assembly: OwinStartup(typeof(WebApp.App_Start.Startup))]
 
@@ -14,15 +15,16 @@ namespace WebApp.App_Start
     {
         public void Configuration(IAppBuilder app)
         {
+            HttpConfiguration config = GlobalConfiguration.Configuration;
+
             app.UseCookieAuthentication(new CookieAuthenticationOptions
             {
                 AuthenticationType = DefaultAuthenticationTypes.ExternalCookie,
                 ExpireTimeSpan = new TimeSpan(0, 30, 0),
-                LoginPath = new PathString("/Login/Unauthorized")
+                //LoginPath = new PathString("/Login/Unauthorized")
             });
 
             app.UseExternalSignInCookie(DefaultAuthenticationTypes.ExternalCookie);
-
             // Mano login info
             app.UseFacebookAuthentication(new FacebookAuthenticationOptions
             {
@@ -35,7 +37,7 @@ namespace WebApp.App_Start
             //    AppId = "158236271388852",
             //    AppSecret = "a80ee0230cb0366ec1366ec5f0b65401"
             //});
-
+            WebApiConfig.Register(app, config);
         }
     }
 }
