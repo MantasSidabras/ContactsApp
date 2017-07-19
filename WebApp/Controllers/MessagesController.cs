@@ -8,6 +8,7 @@ using System.Net.Http;
 using System.Web.Http;
 using System.Web.Http.Cors;
 using ContactsApp.Data.ContactRepository;
+using WebApp.Message_Managment;
 
 namespace ContactsApp.Api.Controllers
 {
@@ -38,6 +39,8 @@ namespace ContactsApp.Api.Controllers
                 return BadRequest();
             }
             //SEND Message
+            var smsManager = new SmsManager("sid.mantas@gmail.com", "txvyrhbl");
+            smsManager.SendMessage(_contactRepository.GetContact(message.ContactId.Value).Phone, message.Text);
             _contactRepository.AddMessage(message); // Adds message record to database
             return Ok(message);
         }

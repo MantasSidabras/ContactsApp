@@ -9,7 +9,7 @@ app.controller('contactsController', ['$scope', '$http', function ($scope, $http
         url: 'http://localhost:64014/Contacts'
     }).then(function (response) { self.contacts = response.data; });
 
-    var uriDelete = 'http://localhost:64014/Contacts/Delete';
+    //var uriDelete = 'http://localhost:64014/Contacts/Delete';
 
     self.remove = function (contact) {
         $http({

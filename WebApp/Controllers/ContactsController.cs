@@ -72,10 +72,10 @@ namespace WebApp.Controllers
         public IHttpActionResult Delete(int id)
         {
             var contact = _contactRepository.GetContact(id);
-            if (contact == null)
-            {
-                return BadRequest();
-            }
+            //if (contact == null)
+            //{
+            //    return BadRequest();
+            //}
             _contactRepository.DeleteContact(id);
             return Ok(contact);
         }

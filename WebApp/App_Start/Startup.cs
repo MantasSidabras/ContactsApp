@@ -6,6 +6,8 @@ using Microsoft.Owin.Security.Cookies;
 using Microsoft.AspNet.Identity;
 using Microsoft.Owin.Security.Facebook;
 using System.Web.Http;
+using WebApp.Message_Managment;
+using System.Threading;
 
 [assembly: OwinStartup(typeof(WebApp.App_Start.Startup))]
 
@@ -15,6 +17,10 @@ namespace WebApp.App_Start
     {
         public void Configuration(IAppBuilder app)
         {
+
+            Thread.Sleep(5000);
+
+
             HttpConfiguration config = GlobalConfiguration.Configuration;
 
             app.UseCookieAuthentication(new CookieAuthenticationOptions
