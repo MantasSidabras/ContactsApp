@@ -3,27 +3,35 @@
 app.controller('contactsController', ['$scope', '$http', function ($scope, $http, $location) {
 
     var self = this;
+    self.contacts = [];
 
     $http({
         method: 'GET',
         url: 'http://localhost:64014/Contacts'
     }).then(function (response) { self.contacts = response.data; });
 
-    //var uriDelete = 'http://localhost:64014/Contacts/Delete';
+
+    //self.remove = function (contact) {
+    //    $http({
+    //        method: 'DELETE',
+    //        url: 'http://localhost:64014/Contacts/Delete',
+    //        params: { id: contact.Id }
+
+    //    }).then(function (response) {
+    //        var index = self.contacts.indexOf(contact);
+    //        self.contacts.splice(index, 1);
+    //    });
+    //};
 
     self.remove = function (contact) {
-        $http({
-            method: 'DELETE',
-            url: 'http://localhost:64014/Contacts/Delete',
-            params: contact.Id
-
-        }).then(function (response) {
+        $http.delete('http://localhost:64014/Contacts/Delete' + '/' + contact.Id).then(function (response) {
             var index = self.contacts.indexOf(contact);
             self.contacts.splice(index, 1);
-        }).then(function () {
-            $location.path("/");
+
         });
     };
+
+
 }]);
 
 
@@ -82,6 +90,19 @@ app.controller('messageController', function ($scope, $http, $location) {
         });
     };
 
+    self.sendEmail = function (contactId) {
+        self.message.ContactId = contactId;
+        $http({
+            method: 'POST',
+            url: 'http://localhost:64014/Messages/Email',
+            data: self.message
+        }).then(function () {
+            $location.path("/");
+        });
+
+    }
+
+
     self.getEmail = function (contactId) {
 
         var result = false;
@@ -119,7 +140,7 @@ app.controller('loginController', function ($scope, $http, $window, $location) {
     var redirectUri = '63994';
 
     $window.location.href = uri + '/' + redirectUri;
-    
+
 });
 
 //app.controller("loginController", function ($scope, $http, $window) {

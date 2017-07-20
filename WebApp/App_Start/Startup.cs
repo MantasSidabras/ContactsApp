@@ -8,6 +8,7 @@ using Microsoft.Owin.Security.Facebook;
 using System.Web.Http;
 using WebApp.Message_Managment;
 using System.Threading;
+using WebApp.Models;
 
 [assembly: OwinStartup(typeof(WebApp.App_Start.Startup))]
 
@@ -17,10 +18,6 @@ namespace WebApp.App_Start
     {
         public void Configuration(IAppBuilder app)
         {
-
-            Thread.Sleep(5000);
-
-
             HttpConfiguration config = GlobalConfiguration.Configuration;
 
             app.UseCookieAuthentication(new CookieAuthenticationOptions
@@ -37,12 +34,6 @@ namespace WebApp.App_Start
                 AppId = "1376825639104971",
                 AppSecret = "396e1f058eff4453b974858285d9a3d0"
             });
-
-            //app.UseFacebookAuthentication(new Microsoft.Owin.Security.Facebook.FacebookAuthenticationOptions
-            //{
-            //    AppId = "158236271388852",
-            //    AppSecret = "a80ee0230cb0366ec1366ec5f0b65401"
-            //});
             WebApiConfig.Register(app, config);
         }
     }

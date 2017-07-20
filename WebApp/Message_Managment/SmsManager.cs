@@ -6,17 +6,16 @@ using System.Net.Http;
 using System.Net.Http.Headers;
 using System.Security.Policy;
 using System.Threading.Tasks;
-using RestSharp;
+using WebApp.Models;
+using Newtonsoft.Json;
 
 namespace WebApp.Message_Managment
 {
-
-
     public class SmsManager
     {
         private static readonly HttpClient _client = new HttpClient();
+
         private readonly string _accountReference = "EX0235292";
-        private readonly string _phone = "37061148271";
         private readonly string uri = "https://api.esendex.com/v1.0/messagedispatcher";
         private readonly string _base64Login;
 
@@ -27,19 +26,29 @@ namespace WebApp.Message_Managment
 
         }
 
-
-        public void SendMessage(string phone, string message) 
+        public async Task<HttpResponseMessage> SendMessageEsendex(string phone, string message)
         {
+            EsendexModel model = new EsendexModel
+            {
+                accountreference = _accountReference,
+                messages = new EsendexMessage[]
+                {
+                    new EsendexMessage
+                        {
+                            to = phone,
+                            body = message
+                        }
+                }
+            };
 
-            var client = new RestClient(uri);
-            var request = new RestRequest(Method.POST);
-            request.AddHeader("content-type", "application/json");
-            request.AddHeader("authorization", $"Basic { _base64Login }");
-            request.AddHeader("accept", "application/json");
-            request.AddHeader("context-type", "application/json");
-            request.AddParameter("application/json", $"{{\r\n  \"accountreference\":\"{_accountReference}\",\r\n  \"messages\":[{{\r\n    \"to\":\"{ _phone }\",\r\n    \"body\":\"{ message }\"\r\n  }}]\r\n}}", ParameterType.RequestBody);
-            IRestResponse response = client.Execute(request);
+            StringContent content = new StringContent(JsonConvert.SerializeObject(model));
+            content.Headers.ContentType = new MediaTypeHeaderValue("application/json");
+
+            _client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Basic", _base64Login);
+            HttpRequestMessage request = new HttpRequestMessage(HttpMethod.Post, uri);
+            request.Content = content;
+            var response = await _client.SendAsync(request);
+            return response;
         }
-
     }
 }

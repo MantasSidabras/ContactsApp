@@ -28,11 +28,6 @@ namespace ContactsRepository
     
         public virtual DbSet<Contact> Contacts { get; set; }
         public virtual DbSet<Message> Messages { get; set; }
-        public virtual DbSet<C__MigrationHistory> C__MigrationHistory { get; set; }
-        public virtual DbSet<AspNetRole> AspNetRoles { get; set; }
-        public virtual DbSet<AspNetUserClaim> AspNetUserClaims { get; set; }
-        public virtual DbSet<AspNetUserLogin> AspNetUserLogins { get; set; }
-        public virtual DbSet<AspNetUser> AspNetUsers { get; set; }
         public virtual DbSet<ContactToMessage> ContactToMessages { get; set; }
     }
 }

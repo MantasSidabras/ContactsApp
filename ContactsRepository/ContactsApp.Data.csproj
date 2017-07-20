@@ -106,18 +106,6 @@
     </Content>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="AspNetRole.cs">
-      <DependentUpon>ContactsDb.tt</DependentUpon>
-    </Compile>
-    <Compile Include="AspNetUser.cs">
-      <DependentUpon>ContactsDb.tt</DependentUpon>
-    </Compile>
-    <Compile Include="AspNetUserClaim.cs">
-      <DependentUpon>ContactsDb.tt</DependentUpon>
-    </Compile>
-    <Compile Include="AspNetUserLogin.cs">
-      <DependentUpon>ContactsDb.tt</DependentUpon>
-    </Compile>
     <Compile Include="Contact.cs">
       <DependentUpon>ContactsDb.tt</DependentUpon>
     </Compile>
@@ -137,9 +125,6 @@
       <DependentUpon>ContactsDb.edmx</DependentUpon>
     </Compile>
     <Compile Include="ContactToMessage.cs">
-      <DependentUpon>ContactsDb.tt</DependentUpon>
-    </Compile>
-    <Compile Include="C__MigrationHistory.cs">
       <DependentUpon>ContactsDb.tt</DependentUpon>
     </Compile>
     <Compile Include="Intefaces\IContactRepository.cs" />

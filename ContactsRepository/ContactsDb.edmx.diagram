@@ -8,15 +8,7 @@
         <EntityTypeShape EntityType="ContactsDbModel.Contact" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
         <EntityTypeShape EntityType="ContactsDbModel.Message" Width="1.5" PointX="5.75" PointY="1" IsExpanded="true" />
         <AssociationConnector Association="ContactsDbModel.FK_Messages_Contacts" />
-        <EntityTypeShape EntityType="ContactsDbModel.C__MigrationHistory" Width="1.5" PointX="7.75" PointY="3.75" />
-        <EntityTypeShape EntityType="ContactsDbModel.AspNetRole" Width="1.5" PointX="0.75" PointY="5.5" />
-        <EntityTypeShape EntityType="ContactsDbModel.AspNetUserClaim" Width="1.5" PointX="5.25" PointY="6.625" />
-        <EntityTypeShape EntityType="ContactsDbModel.AspNetUserLogin" Width="1.5" PointX="5.25" PointY="4" />
-        <EntityTypeShape EntityType="ContactsDbModel.AspNetUser" Width="1.5" PointX="3" PointY="4.25" />
         <EntityTypeShape EntityType="ContactsDbModel.ContactToMessage" Width="1.5" PointX="8.75" PointY="0.75" />
-        <AssociationConnector Association="ContactsDbModel.FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId" />
-        <AssociationConnector Association="ContactsDbModel.FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId" />
-        <AssociationConnector Association="ContactsDbModel.AspNetUserRoles" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>
