@@ -3,6 +3,8 @@ using Microsoft.Practices.Unity;
 using Microsoft.Practices.Unity.Configuration;
 using ContactsApp.Data.Intefaces;
 using ContactsApp.Data.ContactRepository;
+using WebApp.Interfaces;
+using WebApp.Message_Managment;
 
 namespace WebApp.App_Start
 {
@@ -38,7 +40,10 @@ namespace WebApp.App_Start
             // container.LoadConfiguration();
 
             // TODO: Register your types here
-             container.RegisterType<IContactRepository, ContactRepository>();
+            container.RegisterType<IContactRepository, ContactRepository>();
+            container.RegisterType<ISendGridEmailer, SendGridEmailer>();
+            container.RegisterType<ISmsManager, SmsManager>();
+
         }
     }
 }

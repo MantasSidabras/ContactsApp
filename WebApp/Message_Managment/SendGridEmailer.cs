@@ -1,26 +1,24 @@
 ﻿using Newtonsoft.Json;
-using SendGrid;
-using SendGrid.Helpers.Mail;
-using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Net.Http;
 using System.Net.Http.Headers;
 using System.Threading.Tasks;
-using System.Web;
+using System.Web.Configuration;
+using WebApp.Interfaces;
+using WebApp.Models;
 using WebApp.Models.SendGridModels;
 
-namespace WebApp.Models
+namespace WebApp.Message_Managment
 {
-    public class SendGridEmailer
+    public class SendGridEmailer : ISendGridEmailer
     {
         private static readonly HttpClient _client = new HttpClient();
         private string uri = "https://api.sendgrid.com/v3/mail/send";
         private string _authKey;
         
-        public SendGridEmailer(string authKey)
+        public SendGridEmailer()
         {
-            _authKey = authKey;
+            _authKey = WebConfigurationManager.AppSettings["authKey"];
         }
 
 
@@ -28,9 +26,9 @@ namespace WebApp.Models
         {
             var model = new SendGridModel
             {
-                personalizations = new List<SendGridModels.Personalization>()
+                personalizations = new List<Personalization>()
                 {
-                    new SendGridModels.Personalization()
+                    new Personalization()
                     {
                         to = new List<To>() {
                             new To { email = clientEmail }
@@ -42,9 +40,9 @@ namespace WebApp.Models
                 {
                     email = "I.Will.Find.You@sender.com"
                 },
-                content = new List<SendGridModels.Content>()
+                content = new List<Models.SendGridModels.Content>()
                 {
-                    new SendGridModels.Content()
+                    new Models.SendGridModels.Content()
                     {
                         type = "text/plain",
                         value = clientText

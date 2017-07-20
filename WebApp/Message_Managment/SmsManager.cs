@@ -1,17 +1,15 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
+﻿using Newtonsoft.Json;
+using System;
 using System.Net.Http;
 using System.Net.Http.Headers;
-using System.Security.Policy;
 using System.Threading.Tasks;
+using System.Web.Configuration;
+using WebApp.Interfaces;
 using WebApp.Models;
-using Newtonsoft.Json;
 
 namespace WebApp.Message_Managment
 {
-    public class SmsManager
+    public class SmsManager : ISmsManager
     {
         private static readonly HttpClient _client = new HttpClient();
 
@@ -19,14 +17,16 @@ namespace WebApp.Message_Managment
         private readonly string uri = "https://api.esendex.com/v1.0/messagedispatcher";
         private readonly string _base64Login;
 
-        public SmsManager(string username, string password)
+        public SmsManager()
         {
+            var username = WebConfigurationManager.AppSettings["esendexUsername"];
+            var password = WebConfigurationManager.AppSettings["esendexPassword"];
             var plainTextBytes = System.Text.Encoding.UTF8.GetBytes(string.Format("{0}:{1}", username, password));
             _base64Login = Convert.ToBase64String(plainTextBytes);
 
         }
 
-        public async Task<HttpResponseMessage> SendMessageEsendex(string phone, string message)
+        public async Task<HttpResponseMessage> SendMessage(string phone, string message)
         {
             EsendexModel model = new EsendexModel
             {
@@ -50,5 +50,6 @@ namespace WebApp.Message_Managment
             var response = await _client.SendAsync(request);
             return response;
         }
+
     }
 }

@@ -168,15 +168,17 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Interfaces\ISendGridEmailer.cs" />
+    <Compile Include="Interfaces\ISmsManager.cs" />
     <Compile Include="Message_Managment\SmsManager.cs" />
-    <Compile Include="Models\EsendexMessage.cs" />
-    <Compile Include="Models\EsendexModel.cs" />
-    <Compile Include="Models\SendGridEmailer.cs" />
+    <Compile Include="Models\EsendexModels\EsendexMessage.cs" />
+    <Compile Include="Models\EsendexModels\EsendexModel.cs" />
+    <Compile Include="Message_Managment\SendGridEmailer.cs" />
     <Compile Include="Models\SendGridModels\Content.cs" />
     <Compile Include="Models\SendGridModels\From.cs" />
     <Compile Include="Models\SendGridModels\Personalization.cs" />
     <Compile Include="Models\SendGridModels\SendGridModel.cs" />
-    <Compile Include="Models\SmsMessage.cs" />
+    <Compile Include="Models\EsendexModels\SmsMessage.cs" />
     <Compile Include="Models\SendGridModels\To.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
